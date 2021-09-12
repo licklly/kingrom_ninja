@@ -40,10 +40,14 @@ export function WSCKLoginAPI(body) {
 
 export function getWSCKUserinfoAPI(eid) {
   const searchParams = new URLSearchParams()
-  searchParams.set('eid', eid)
+  searchParams.set('wseid', wseid)
   return api.get('WSCKUserinfo', { searchParams: searchParams }).json()
 }
 
 export function WSCKDelaccountAPI(body) {
   return api.post('WSCKDelaccount', { json: body }).json()
+}
+
+export function remarkupdateWSCKAPI(body) {
+  return api.post('updateWSCK/remark', { json: body }).json()
 }

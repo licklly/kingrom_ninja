@@ -10,7 +10,8 @@
         <p>为了您的财产安全请关闭免密支付以及打开支付验密（京东-设置-支付设置-支付验密设置）。</p>
         <p>建议京东账户绑定微信以保证提现能到账。</p>
         <p>由于京东异地登录限制，扫码获取cookie只有2小时有效期，因此暂时关闭扫码功能，现需手动抓取Cookie。</p>
-        <b>且有效期不长，平均3-5天，因此需要及时更新。</b>
+        <p>且有效期不长，平均3-5天，因此需要及时更新。</p>
+        <b>安全起见，WSCK可以在CK登录后录入，期限半永久。</b>
       </div>
       <div class="card-footet"></div>
     </div>
@@ -46,7 +47,7 @@
           <span class="ml-2 px-2 py-1 bg-gray-200 rounded-full font-normal text-xs">余量：{{ marginWSCKCount }}</span>
         </div>
         <div class="card-body text-base leading-6">
-          <b>wskey有效期长达一年，请联系管理员确认使用</b>
+          <b>wskey有效期长达一年，请联系管理员确认使用（删不掉，慎用）</b>
           <p>用户须手动提取pin和wskey，格式如："pt_pin=xxxxxx;wskey=xxxxxxxxxx;"。</p>
           <p class="card-subtitle">——IOS用户手机抓包APP&emsp;<a style="" href="https://apps.apple.com/cn/app/stream/id1312141691" target="_blank" id="downiOSApp">点击跳转安装</a> </p>
           <p class="card-subtitle">——在api.m.jd.com域名下找POST请求大概率能找到wskey。</p>
@@ -56,7 +57,7 @@
         <span class="card-subtitle"> 请在下方输入您的 WSCK  </span>
       </div>
       <div class="card-body text-center">
-        <el-input v-model="jdwsck" size="small" clearable class="my-4 w-full" />
+        <el-input v-model="jdwsck" placeholder="pin=xxxxxx;wskey=xxxxxxxxxx;" size="small" clearable class="my-4 w-full" />
         <el-button type="primary" size="small" round @click="WSCKLogin">录入</el-button>
       </div>
       <div class="card-footet"></div>
@@ -69,7 +70,7 @@
           <span class="ml-2 px-2 py-1 bg-gray-200 rounded-full font-normal text-xs">余量：{{ marginCount }}</span>
         </div>
         <div class="card-body text-base leading-6">
-          <p>PC用户建议使用开源工具<a style="" href="https://github.com/Waikkii/JD_Get_Cookie" target="_blank" id="waikiki">JD_Get_Cookie</a>获取cookie并在下方填写。</p>
+          <p>PC用户建议使用浏览器<a style="" href="https://www.juan920.com/1310.html" target="_blank" id="kingrom">Cookie获取</a>获取cookie并在下方填写。</p>
           <p>手机用户可以使用Alook浏览器登录<a style="" href="https://m.jd.com/" target="_blank" id="jd">JD官网</a>，并在菜单-工具箱-开发者工具-Cookies中获取（Android和iPhone通用）。</p>
           <p>另外也可以使用抓包工具（iPhone：Stream，Android：HttpCanary）抓取京东app的ck，要注意pt_key和pt_pin字段是以app_open开头的。</p>
           <p>cookie直接填入输入框即可，Ninja会自动正则提取pt_key和pt_pin。</p>
@@ -119,7 +120,7 @@ export default {
       jdwsck: undefined,
       showQR:false,
       showWSCK:false,
-      showCK:false,
+      showCK:true,
 
     })
 
@@ -229,8 +230,8 @@ export default {
         data.jdwsck.match(/pin=(.*?);/)[1]
       if (wskey && pin) {
         const body = await WSCKLoginAPI({ wskey: wskey, pin: pin })
-        if (body.data.eid) {
-          localStorage.setItem('eid', body.data.eid)
+        if (body.data.wseid) {
+          localStorage.setItem('wseid', body.data.wseid)
           ElMessage.success(body.message)
           router.push('/')
         } else {
