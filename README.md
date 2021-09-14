@@ -16,7 +16,7 @@
 
 当前：支持CK注册，登录和删除，支持WSKEY录入和删除，登录成功进入个人中心，可修改备注。默认登录CK才可提交WSCK，主页提交WSCK容易乱，不建议。
 
-新特性：支持Github Action前端编译并自动替换文件。Fork之后：Action->BuildAndCommit->Run workflow->Run workfilow即可。
+新特性：支持Github Action前端编译并自动替换文件。Fork之后：Action->BuildAndCommit->Run workflow->Run workflow即可。
 
 ## 说明
 
@@ -99,6 +99,7 @@ Ninja 仅支持 qinglong 2.8.2+
    git clone https://github.com/KingRan/kingrom_ninja.git /ql/ninja
    cd /ql/ninja/backend
    pnpm install
+   cp .env.example .env # 如有需要, 修改.env
    pm2 start
    cp sendNotify.js /ql/scripts/sendNotify.js
    ```
@@ -200,10 +201,8 @@ pm2 start
 ## 如何删除Ninja
 
 ```bash
-cd /ql/ninja/backend
+cd /ql/ninja
 pm2 delete ninja
-cd ..
-cd ..
 rm -rf *
 rm -r ./.*
 ```
