@@ -1,6 +1,8 @@
 # Ninja
 
-基本功能已完善，鸽几天，有问题先仔细看此README，有需求可以提PR
+支持CK注册，登录和删除，支持WSKEY录入和删除，登录成功进入个人中心，可修改备注。默认登录CK才可提交WSCK，主页提交WSCK容易乱，不建议。
+
+基本功能已完善，鸽几天，有问题先仔细看此README。
 
 ## 致谢
 
@@ -12,9 +14,9 @@
 
 仓库地址：https://github.com/huiyi9420/ninja
 
-## 特性
+## 新
 
-当前：支持CK注册，登录和删除，支持WSKEY录入和删除，登录成功进入个人中心，可修改备注。默认登录CK才可提交WSCK，主页提交WSCK容易乱，不建议。
+当前：增加备用接口（针对某些半黑号）
 
 新特性：支持Github Action前端编译并自动替换文件。Fork之后：Action->BuildAndCommit->Run workflow->Run workflow即可。
 
@@ -195,6 +197,7 @@ pm2 start
 cd /ql/ninja
 git checkout .
 git pull
+cd backend
 pm2 start
 ```
 
